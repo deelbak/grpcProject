@@ -1,0 +1,17 @@
+with-expecter: true
+boilerplate-file: ".mockery_boilerplate_text.txt"
+dir: "{{.InterfaceDir}}/mocks"
+filename: "mock_{{.InterfaceNameSnake}}.go"
+outpkg: "mocks"
+mockname: "{{.InterfaceName}}"
+resolve-type-alias: true
+issue-845-fix: true
+
+packages:
+  "github.com/deelbak/grpcProject/internal/service":
+    config:
+      include-regex: ".*Service"
+  
+  "github.com/deelbak/grpcProject/internal/repository":
+    config:
+      include-regex: ".*Repository"

@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+package ufo.v1;
+
+option go_package = "github.com/deelbak/grpc/pkg/proto/ufo/v1;ufov1";
+
+service UfoService {
+  // Create creates a new UFO entry.
+    rpc Create(CreateRequest) returns (CreateResponse){
+      option (google.api.http) = {
+        post: "/api/v1/ufos"
+        body: "*"
+      };
+    };
+
+    // Get retrieves a UFO entry by its ID.
+    rpc Get(GetRequest) returns (GetResponse){
+      option (google.api.http) = {
+        get: "/api/v1/ufos/{id}"
+      };
+    };
+
+    // Update modifies an existing UFO entry.
+    rpc Update(UpdateRequest) returns (google.protobuf.Empty){
+      option (google.api.http) = {
+        patch: "/api/v1/ufos/{id}"
+        body: "*"
+      };
+    };
+
+    // Delete removes a UFO entry by its ID.
+    rpc Delete(DeleteRequest) returns (google.protobuf.Empty){
+      option (google.api.http) = {
+        delete: "/api/v1/ufos/{id}"
+      };
+    };
+}
+
+// SightingInfo contains information about UFO sighting.
+// message SightingInfo {
+
+//     google.protobuf.Timestamp timestamp = 1;
+
+//     string location = 2;
+
+//     string description = 3;
+
+//     google.protobuf.StringValue color = 4;
+
+//     google.protobuf.BoolValue sound = 5;
+
+//     google.protobuf.Int32Value duration_seconds = 6;
+// }
+
+// UFO represents a UFO entity.
+message UFO {
+  string id = 1;
+  string name = 2 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  string description = 3;
+}
+
+// CreateRequest is a request for creating a UFO.
+message CreateRequest {
+  string name = 1 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  string description = 2;
+}
+
+// CreateResponse is a response after creating a UFO.
+message CreateResponse {
+  UFO ufo = 1;
+}
+
+// GetRequest is a request for getting a UFO by id.
+message GetRequest {
+  string id = 1;
+}
+
+// GetResponse is a response containing UFO data.
+message GetResponse {
+  UFO ufo = 1;
+}
+
+// UpdateRequest is a request for updating a UFO.
+message UpdateRequest {
+  string id = 1;
+  string name = 2 [(validate.rules).string = {min_len: 1, max_len: 20}];
+  string description = 3;
+}
+
+// UpdateResponse is a response after updating a UFO.
+message UpdateResponse {
+  UFO ufo = 1;
+}
+
+// DeleteRequest is a request for deleting a UFO by id.
+message DeleteRequest {
+  string id = 1;
+}
+
+// DeleteResponse is a response after deleting a UFO.
+message DeleteResponse {
+  bool success = 1;
+}

@@ -1,0 +1,24 @@
+{
+    "serviceName": "openDeposit",
+    "applicationId": 2148512541,
+    "realAuthType": "push",
+    "inputParameters": {
+        "productName": "SHANYRAQ",
+        "productCode": "15737",
+        "isFatca": false,
+        "language": "RU",
+        "transferType": "FromCard",
+        "sourceContract": "2643889590",
+        "cardMask": "•••• 5367",
+        "capitalization": "ToDeposit",
+        "capitalizationContract": "",
+        "capitalizationCardMask": "",
+        "depositAmount": 347223,
+        "depositCurrency": "KZT",
+        "depositTerm": 36,
+        "phone": "77753854146",
+        "tabNumber": "00000000",
+        "apartmentCost": "25000000"
+    },
+    "verificationId": "6f1093d1-d8f7-42ad-acd1-16ff9573fd1d"
+}
